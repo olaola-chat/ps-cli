@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover"
+    />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <style>
+      #loading {
+        width: 10vw;
+        height: 10vw;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        margin: auto;
+        border: solid 1vw gray;
+        border-top-color: transparent;
+        border-radius: 50%;
+        animation: rotate infinite 500ms ease-in-out;
+        z-index: -1;
+      }
+      @keyframes rotate {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div id="loading"></div>
+    </div>
+    <script src="/ola-log.min.js"></script>
+    <script>
+      window.LOG.init('ps_page', {
+        //
+        // serverUrl 必填，日志服务器地址
+        // - 跟业务项目主域保持一致 https://data.${domain}/sync_js
+        // - 国内通用：https://data.yinjietd.com/sync_js
+        // - 海外通用：https://data.hxty-agent.com/sync_js
+        //
+        serverUrl: 'https://data.starcloud.rocks/sync_js',
+        appId: '3222994e16a24d1d961b5b247576a3a2', // 可选，业务项目上报AppId，不填时仅上报前端性能数据，不上报业务数据
+        // autoTrack: true, //可选，业务项目是否自动采集ta_pageview事件，默认false
+        isDev: true, //可选，是否上报到测试项目，默认false。为true时，前端性能及业务上报均上报到测试项目下
+        // listenImgError: false, //可选，是否监听图片资源加载错误，默认false
+      });
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

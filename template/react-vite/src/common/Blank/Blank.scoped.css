@@ -1,0 +1,19 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 750px;
+}
+
+svg {
+  width: 50%;
+  margin-left: 80px;
+}
+
+.children {
+  color: #999;
+  font-size: 28px;
+  text-align: center;
+}
