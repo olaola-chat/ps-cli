@@ -27,6 +27,13 @@ export default defineConfig({
   ],
   server: {
     host: '0.0.0.0',
+    proxy: {
+      '/proxyClient': {
+        target: 'http://47.96.23.201',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/proxyClient/, ''),
+      },
+    },
   },
   css: {
     postcss: {
