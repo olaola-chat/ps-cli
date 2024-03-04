@@ -3,7 +3,12 @@ import { QS } from '@ola/utils';
 type Cb = (...args: any[]) => void;
 type Data = Record<string, any>;
 
-function callAppMethod(funcType: string, data?: Data | null, callback?: Cb) {
+async function callAppMethod(
+  funcType: string,
+  data?: Data | null,
+  callback?: Cb,
+  fallback?: Cb,
+) {
   if (typeof data === 'function') {
     callback = data as () => void;
     data = null;
@@ -25,7 +30,7 @@ function callAppMethod(funcType: string, data?: Data | null, callback?: Cb) {
   const cbFunName =
     'nativeCB' + new Date().getTime() + parseInt('' + Math.random() * 100);
 
-  return new Promise((resolve) => {
+  const bridgePromise = new Promise((resolve) => {
     if (callback) {
       window[cbFunName] = function (jsonData: Data) {
         resolve(jsonData);
@@ -41,6 +46,15 @@ function callAppMethod(funcType: string, data?: Data | null, callback?: Cb) {
       `banban://${funcType}${paramData ? '?' + QS.stringify(paramData) : ''}`,
     );
   });
+  // 兜底 promise
+  const errorPromise = new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({});
+      fallback && fallback();
+    }, 2000);
+  });
+  const res = await Promise.race([bridgePromise, errorPromise]);
+  return res;
 }
 
 function listenAppMethod(funcType: string, data: Data | null, callback?: Cb) {
