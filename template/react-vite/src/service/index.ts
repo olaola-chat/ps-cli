@@ -5,8 +5,8 @@ import Native from '@/native';
 
 const PS_LOCAL_SERVER = 'http://47.96.23.201';
 const PS_DEV_SERVER = 'http://47.96.23.201'; // ps测试域名
-const PS_ALPHA_SERVER = 'https://api.starcloud.rocks'; // ps alpha
-const PS_PRODUCT_SERVER = 'https://api.starcloud.rocks'; // ps 线上
+const PS_ALPHA_SERVER = 'https://api.partystar.cloud'; // ps alpha
+const PS_PRODUCT_SERVER = 'https://api.partystar.cloud'; // ps 线上
 
 const __SERVER__: Record<string, string> = {
   local: PS_LOCAL_SERVER,

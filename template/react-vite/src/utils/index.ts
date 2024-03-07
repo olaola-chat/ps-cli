@@ -23,7 +23,10 @@ export const getServerEnv = () => {
     return server_env;
   }
 
-  if (document.location.href.indexOf('starcloud.rocks') > -1) {
+  if (
+    document.location.href.indexOf('starcloud.rocks') > -1 ||
+    document.location.href.indexOf('starcloud.cloud') > -1
+  ) {
     server_env = 'production_starcloud';
     return server_env;
   }
